@@ -13,13 +13,14 @@ function zig_language_definition() {
   const KEYWORDS =
     "pub align allowzero and asm async await break catch comptime|10 const continue defer " +
     "else enum errdefer export extern false fn for if inline noalias null or orelse packed promise " +
-    "resume return linksection struct suspend nosuspend noinline callconv switch test threadlocal true try undefined union unreachable|10 " +
-    "usingnamespace var volatile while error";
+    "resume return linksection struct suspend nosuspend noinline callconv switch test threadlocal true try " +
+    "undefined union unreachable usingnamespace var volatile while error";
+
   const TYPES = {
     className: "type",
     variants: [
       {
-        // Integer Types
+        // Numeric Types
         match:
           "\\b(f16|f32|f64|f128|u\\d+|i\\d+|isize|usize|comptime_int|comptime_float)\\b",
         relevance: 2,
@@ -152,7 +153,7 @@ function zig_language_definition() {
     className: "numbers",
     variants: [
       {
-        // float
+        // Float
         match: "\\b[0-9][0-9_]*(\\.[0-9][0-9_]*)?([eE][+-]?[0-9_]+)?\\b",
       },
       {
