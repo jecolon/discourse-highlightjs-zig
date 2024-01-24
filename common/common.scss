@@ -8,3 +8,5 @@
 .lang-zig .hljs-function { color: #b1a0f8; }
 .lang-zig .hljs-numbers { color: #ff8080; }
 .lang-zig .hljs-string { color: #2e5; }
+.lang-zig .hljs-string-escape { font-weight: bold; }
+.lang-zig .hljs-string-escape-invalid { color: black; background-color: #ff5050; }

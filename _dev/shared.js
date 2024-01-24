@@ -74,14 +74,15 @@ function zig_language_definition() {
   };
 
   const STRINGCONTENT = {
-    className: "string",
     variants: [
       {
         // escape
+        className: "string-escape",
         match: "\\\\([nrt'\"\\\\]|(x[0-9a-fA-F]{2})|(u\\{[0-9a-fA-F]+\\}))",
       },
       {
         // invalid string escape
+        className: "string-escape-invalid",
         match: "\\\\.",
       },
     ],
