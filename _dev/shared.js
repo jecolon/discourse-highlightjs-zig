@@ -103,6 +103,14 @@ function zig_language_definition() {
     endsParent:true,
   };
 
+  const FIELD_IDENTIFIER = {
+    className: "field-identifier",
+    begin: '\\.',
+    excludeBegin: true,
+    contains: [IDENTIFIER],
+    relevance: 0,
+  };
+
   const STRINGS = {
     className: "string",
     variants: [
@@ -192,6 +200,7 @@ function zig_language_definition() {
 
   const ZIG_DEFAULT_CONTAINS = [
     LITERALS,
+    FIELD_IDENTIFIER,
     STRINGS,
     COMMENTS,
     TYPES,
