@@ -88,6 +88,21 @@ function zig_language_definition() {
     ],
     relevance: 0,
   };
+
+  const IDENTIFIER = {
+    variants: [
+      {
+        match: /([_a-zA-Z][_a-zA-Z0-9]*)/,
+      },
+      {
+        begin: '@"',
+        end: '"',
+        contains: [STRINGCONTENT],
+      },
+    ],
+    endsParent:true,
+  };
+
   const STRINGS = {
     className: "string",
     variants: [
@@ -140,13 +155,11 @@ function zig_language_definition() {
 
   const FUNCTION = {
     className: "function",
-    variants: [
-      {
-        beginKeywords: "fn",
-        end: "([_a-zA-Z][_a-zA-Z0-9]*)",
-        excludeBegin: true,
-      },
-    ],
+    beginKeywords: "fn",
+    end: "\\(",
+    excludeBegin: true,
+    excludeEnd: true,
+    contains: [IDENTIFIER],
     relevance: 0,
   };
 
