@@ -3,6 +3,11 @@
 .lang-zig .hljs-keyword { font-weight: bold; }
 .lang-zig .hljs-literal { color: #ff8080; }
 .lang-zig .hljs-comment { color: #aa7; }
+.lang-zig .hljs-comment-tag { font-weight: bold; }
+.lang-zig .hljs-comment-tag.tag-todo { color: #ff8a66; }
+.lang-zig .hljs-comment-tag.tag-fixme { color: #ff4911; background-color: black; }
+.lang-zig .hljs-comment-tag.tag-xxx { color: black; background-color: #ff4911; }
+.lang-zig .hljs-comment-tag.tag-note { color: #ffdb50; }
 .lang-zig .hljs-built_in { color: #ff894c; }
 .lang-zig .hljs-type { color: #68f; font-weight: bold; }
 .lang-zig .hljs-function { color: #b1a0f8; }

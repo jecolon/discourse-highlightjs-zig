@@ -50,8 +50,24 @@ function zig_language_definition() {
   };
 
   const COMMENTTAGS = {
-    className: "title",
-    match: "\\b(TODO|FIXME|XXX|NOTE)\\b:?",
+    variants: [
+      {
+        className: "comment-tag tag-todo",
+        match: "TODO",
+      },
+      {
+        className: "comment-tag tag-fixme",
+        match: "FIXME",
+      },
+      {
+        className: "comment-tag tag-xxx",
+        match: "XXX",
+      },
+      {
+        className: "comment-tag tag-note",
+        match: "NOTE",
+      },
+    ],
     relevance: 0,
   };
 
