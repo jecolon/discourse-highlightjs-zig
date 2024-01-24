@@ -5,7 +5,7 @@
 // Once done, copy this function over to common/head_tag.html
 
 function zig_language_definition() {
-    const LITERALS = {
+  const LITERALS = {
     className: "literal",
     match: "(true|false|null|undefined)",
   };
