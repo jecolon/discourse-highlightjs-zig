@@ -8,6 +8,18 @@
 .lang-zig .hljs-comment-tag.tag-fixme { color: #ff4911; background-color: black; }
 .lang-zig .hljs-comment-tag.tag-xxx { color: black; background-color: #ff4911; }
 .lang-zig .hljs-comment-tag.tag-note { color: #ffdb50; }
+
+@supports(selector(:has(span))) {
+/* color comment line based on the last comment tag contained in the line */
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-todo:last-of-type) { color: #ff8a66; }
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-fixme:last-of-type) { color: #ff4911; background-color: black; }
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-xxx:last-of-type) { color: black; background-color: #ff4911; }
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-note:last-of-type) { color: #ffdb50; }
+
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-xxx:last-of-type) .hljs-comment-tag.tag-todo { background-color: #ff8a66; color:black; }
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-xxx:last-of-type) .hljs-comment-tag.tag-note { background-color: #ffdb50; color:black; }
+}
+
 .lang-zig .hljs-built_in { color: #ff894c; }
 .lang-zig .hljs-type { color: #68f; font-weight: bold; }
 .lang-zig .hljs-function { color: #b1a0f8; }
