@@ -188,7 +188,7 @@ function zig_language_definition() {
   };
 
   const NUMBERS = {
-    className: "numbers",
+    className: "number",
     variants: [
       {
         // Float

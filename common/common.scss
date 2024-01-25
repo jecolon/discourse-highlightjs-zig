@@ -1,29 +1,94 @@
 /* We do not use SASS features here to make it easier to include this file without pre-compilation in _dev/test-syntax-highlight.html */
 
-.lang-zig .hljs-keyword { font-weight: bold; }
-.lang-zig .hljs-literal { color: #ff8080; }
-.lang-zig .hljs-comment { color: #aa7; }
-.lang-zig .hljs-comment-tag { font-weight: bold; }
-.lang-zig .hljs-comment-tag.tag-todo { color: #ff8a66; }
-.lang-zig .hljs-comment-tag.tag-fixme { color: #ff4911; background-color: black; }
-.lang-zig .hljs-comment-tag.tag-xxx { color: black; background-color: #ff4911; }
-.lang-zig .hljs-comment-tag.tag-note { color: #ffdb50; }
+:root {
+  --zig-fg: inherit;
+  --zig-bg: inherit;
+
+  --zig-code-fg: inherit;
+  --zig-code-bg: #f9f9f9; // #f8f8f8;
+
+  --zig-keyword: #333;
+  --zig-literal: #005C5C;
+  --zig-built-in: #005C7A;
+  --zig-type: #458;
+  --zig-function: #900;
+  --zig-function-fw: bold;
+  --zig-number: var(--zig-literal);
+
+  --zig-string: #d14; // #156225;
+  --zig-string-escape-invalid: black;
+  --zig-string-escape-invalid-bg: #ff5050;
+
+  --zig-comment: #545454;
+  --zig-comment-tag-todo: #cc4015; // #ff8a66;
+  --zig-comment-tag-todo-bg: inherit;
+  --zig-comment-tag-fixme: #ff4911;
+  --zig-comment-tag-fixme-bg: black;
+  --zig-comment-tag-xxx: black;
+  --zig-comment-tag-xxx-bg: #ff4911;
+  --zig-comment-tag-note: inherit;
+  --zig-comment-tag-note-bg: #ffdb50;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --zig-fg: #ccc;
+    --zig-bg: #232323;
+
+    --zig-code-fg: #c7c7c7; // #ccc;
+    --zig-code-bg: #3c3c3c; // #222;
+
+    --zig-keyword: #ccc;
+    --zig-literal: #ff8080;
+    --zig-built-in: #ff894c;
+    --zig-type: #68f;
+    --zig-function: #b1a0f8;
+    --zig-function-fw: normal;
+    --zig-number: var(--zig-literal);
+
+    --zig-string: #2e5;
+    --zig-string-escape-invalid: black;
+    --zig-string-escape-invalid-bg: #ff5050;
+
+    --zig-comment: #aa7;
+    --zig-comment-tag-todo: #ff8a66;
+    --zig-comment-tag-todo-bg: inherit;
+    --zig-comment-tag-fixme: #ff4911;
+    --zig-comment-tag-fixme-bg: black;
+    --zig-comment-tag-xxx: black;
+    --zig-comment-tag-xxx-bg: #ff4911;
+    --zig-comment-tag-note: #ffdb50;
+    --zig-comment-tag-note-bg: inherit;
+  }
+}
+
+.lang-zig .hljs-keyword { color: var(--zig-keyword); font-weight: bold; }
+.lang-zig .hljs-literal { color: var(--zig-literal); }
+.lang-zig .hljs-built_in { color: var(--zig-built-in); }
+.lang-zig .hljs-type { color: var(--zig-type); font-weight: bold; }
+.lang-zig .hljs-function { color: var(--zig-function); font-weight: var(--zig-function-fw); }
+.lang-zig .hljs-number { color: var(--zig-number); }
+
+.lang-zig .hljs-string { color: var(--zig-string); }
+.lang-zig .hljs-string-escape { font-weight: bold; }
+.lang-zig .hljs-string-escape-invalid { color: var(--zig-string-escape-invalid); background: var(--zig-string-escape-invalid-bg); }
+
+.lang-zig .hljs-comment { color: var(--zig-comment); font-style: italic; }
+.lang-zig .hljs-comment-tag { font-weight: bold; font-style: normal; }
+.lang-zig .hljs-comment-tag.tag-todo  { color: var(--zig-comment-tag-todo);  background: var(--zig-comment-tag-todo-bg); }
+.lang-zig .hljs-comment-tag.tag-fixme { color: var(--zig-comment-tag-fixme); background: var(--zig-comment-tag-fixme-bg); }
+.lang-zig .hljs-comment-tag.tag-xxx   { color: var(--zig-comment-tag-xxx);   background: var(--zig-comment-tag-xxx-bg); }
+.lang-zig .hljs-comment-tag.tag-note  { color: var(--zig-comment-tag-note);  background: var(--zig-comment-tag-note-bg); }
 
 @supports(selector(:has(span))) {
 /* color comment line based on the last comment tag contained in the line */
-.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-todo:last-of-type) { color: #ff8a66; }
-.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-fixme:last-of-type) { color: #ff4911; background-color: black; }
-.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-xxx:last-of-type) { color: black; background-color: #ff4911; }
-.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-note:last-of-type) { color: #ffdb50; }
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-todo:last-of-type) { color: var(--zig-comment-tag-todo);  background: var(--zig-comment-tag-todo-bg); }
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-fixme:last-of-type){ color: var(--zig-comment-tag-fixme); background: var(--zig-comment-tag-fixme-bg); }
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-xxx:last-of-type)  { color: var(--zig-comment-tag-xxx);   background: var(--zig-comment-tag-xxx-bg); }
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-note:last-of-type) { color: var(--zig-comment-tag-note);  background: var(--zig-comment-tag-note-bg); }
 
-.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-xxx:last-of-type) .hljs-comment-tag.tag-todo { background-color: #ff8a66; color:black; }
-.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-xxx:last-of-type) .hljs-comment-tag.tag-note { background-color: #ffdb50; color:black; }
+/* override certain tags to make them more readable by inverting color and background */
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-xxx:last-of-type) .hljs-comment-tag.tag-todo { background:var(--zig-comment-tag-todo); color: var(--zig-comment-tag-todo-bg); }
+.lang-zig .hljs-comment:has(> span.hljs-comment-tag.tag-xxx:last-of-type) .hljs-comment-tag.tag-note { background:var(--zig-comment-tag-note); color: var(--zig-comment-tag-note-bg); }
 }
 
-.lang-zig .hljs-built_in { color: #ff894c; }
-.lang-zig .hljs-type { color: #68f; font-weight: bold; }
-.lang-zig .hljs-function { color: #b1a0f8; }
-.lang-zig .hljs-numbers { color: #ff8080; }
-.lang-zig .hljs-string { color: #2e5; }
-.lang-zig .hljs-string-escape { font-weight: bold; }
-.lang-zig .hljs-string-escape-invalid { color: black; background-color: #ff5050; }

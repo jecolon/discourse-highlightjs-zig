@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 <html lang="en">
-<head >
+<head>
     <title>Zig Syntax Highlighting</title>
     <meta charset="utf-8"/>
     <!--
@@ -19,10 +20,11 @@
         }
         body {
             padding: 0.4rem;
-            background-color: #222;
-            color: #ccc;
             font-size: 14px;
+            color: var(--zig-fg);
+            background: var(--zig-bg);
         }
+
         #zig_code {
             --gai-code-grid-gap: 1rem;
             display: grid;
@@ -53,7 +55,8 @@
             align-self: stretch;
             --zig-code-border: 1px dotted grey;
             --zig-code-padding: 0.4rem;
-            background-color: #222;
+            color: var(--zig-code-fg);
+            background: var(--zig-code-bg);
             padding: var(--zig-code-padding);
             border: var(--zig-code-border);
             margin: 0;
@@ -201,6 +204,15 @@ pub fn main() !void {
     // XXX NOTE TODO FIXME comment out next line to fix invalid escape
     // FIXME XXX NOTE TODO comment out next line to fix invalid escape
     const invalid_escape = "\\z \\u";
+
+    // TODO NOTE FIXME XXX this ordering makes more sense
+    // this is a normal comment
+    // TODO implement food ordering
+    // NOTE be sure to pick extras
+    // FIXME this isn't working quite right
+    // XXX something is strange here
+
+    // something is strange here XXX I just wanted to NOTE that
 
     var state: Food = .@"🍕";
     std.debug.print("ordering {any}\\n", .{state});
