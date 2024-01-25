@@ -5,7 +5,7 @@
 // Read more in README.md
 //
 function zig_language_definition() {
-    const LITERALS = {
+  const LITERALS = {
     className: "literal",
     match: "(true|false|null|undefined)",
   };
@@ -50,8 +50,24 @@ function zig_language_definition() {
   };
 
   const COMMENTTAGS = {
-    className: "title",
-    match: "\\b(TODO|FIXME|XXX|NOTE)\\b:?",
+    variants: [
+      {
+        className: "comment-tag tag-todo",
+        match: "TODO",
+      },
+      {
+        className: "comment-tag tag-fixme",
+        match: "FIXME",
+      },
+      {
+        className: "comment-tag tag-xxx",
+        match: "XXX",
+      },
+      {
+        className: "comment-tag tag-note",
+        match: "NOTE",
+      },
+    ],
     relevance: 0,
   };
 
@@ -74,19 +90,43 @@ function zig_language_definition() {
   };
 
   const STRINGCONTENT = {
-    className: "string",
     variants: [
       {
         // escape
+        className: "string-escape",
         match: "\\\\([nrt'\"\\\\]|(x[0-9a-fA-F]{2})|(u\\{[0-9a-fA-F]+\\}))",
       },
       {
         // invalid string escape
+        className: "string-escape-invalid",
         match: "\\\\.",
       },
     ],
     relevance: 0,
   };
+
+  const IDENTIFIER = {
+    variants: [
+      {
+        match: /([_a-zA-Z][_a-zA-Z0-9]*)/,
+      },
+      {
+        begin: '@"',
+        end: '"',
+        contains: [STRINGCONTENT],
+      },
+    ],
+    endsParent:true,
+  };
+
+  const FIELD_IDENTIFIER = {
+    className: "field-identifier",
+    begin: '\\.',
+    excludeBegin: true,
+    contains: [IDENTIFIER],
+    relevance: 0,
+  };
+
   const STRINGS = {
     className: "string",
     variants: [
@@ -139,18 +179,16 @@ function zig_language_definition() {
 
   const FUNCTION = {
     className: "function",
-    variants: [
-      {
-        beginKeywords: "fn",
-        end: "([_a-zA-Z][_a-zA-Z0-9]*)",
-        excludeBegin: true,
-      },
-    ],
+    beginKeywords: "fn",
+    end: "\\(",
+    excludeBegin: true,
+    excludeEnd: true,
+    contains: [IDENTIFIER],
     relevance: 0,
   };
 
   const NUMBERS = {
-    className: "numbers",
+    className: "number",
     variants: [
       {
         // Float
@@ -178,6 +216,7 @@ function zig_language_definition() {
 
   const ZIG_DEFAULT_CONTAINS = [
     LITERALS,
+    FIELD_IDENTIFIER,
     STRINGS,
     COMMENTS,
     TYPES,
