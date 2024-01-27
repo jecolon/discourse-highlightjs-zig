@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 <html lang="en">
-<head >
+<head>
     <title>Zig Syntax Highlighting</title>
     <meta charset="utf-8"/>
     <!--
@@ -19,10 +20,11 @@
         }
         body {
             padding: 0.4rem;
-            background-color: #222;
-            color: #ccc;
             font-size: 14px;
+            color: var(--zig-fg);
+            background: var(--zig-bg);
         }
+
         #zig_code {
             --gai-code-grid-gap: 1rem;
             display: grid;
@@ -30,12 +32,13 @@
             grid-template-columns: 1fr;
             grid-template-areas:
                 "code1"
-                "code2";
+                "code2"
+                "code3";
         }
         @media (min-width: 1100px) {
             #zig_code {
                 grid-template-columns: 1fr 1fr;
-                grid-template-areas: "code1 code2";
+                grid-template-areas: "code1 code2 code3";
                 gap: var(--gai-code-grid-gap);
             }
         }
@@ -45,11 +48,15 @@
         #code_container_2 {
             grid-area: code2;
         }
+        #code_container_3 {
+            grid-area: code3;
+        }
         .lang-zig {
             align-self: stretch;
             --zig-code-border: 1px dotted grey;
             --zig-code-padding: 0.4rem;
-            background-color: #222;
+            color: var(--zig-code-fg);
+            background: var(--zig-code-bg);
             padding: var(--zig-code-padding);
             border: var(--zig-code-border);
             margin: 0;
@@ -80,7 +87,7 @@
 <div id="zig_code">
     <pre id='code_container_1' class="lang-zig">Run this fiddle and the highlighted code will appear here.</pre>
     <pre id='code_container_2' class="lang-zig"></pre>
-
+    <pre id='code_container_3' class="lang-zig"></pre>
 </div>
 
 <script type="text/javascript" src="../_dev/shared.js"></script>
@@ -150,15 +157,89 @@ pub fn main() anyerror!void {
     const non_null_terminated_msg: [msg.len]u8 = msg.*;
     _ = printf(&non_null_terminated_msg);
 }`;
+
+    var zig_code_3 = `const print = std.debug.print;
+const std = @import("std");
+
+// code based on https://ziggit.dev/t/how-to-specialize-generic-function/2991/4
+// but made more silly with emojis to test escaping within identifiers
+
+const Food = enum {
+    @"🍕", // Pizza
+    @"\\u{1F354}", // Hamburger
+    @"🍟", // Fries
+};
+const OrderFood = struct {
+    fn @"orderFood() when state = 🍕"(x: i32) Food {
+        _ = x;
+        return .@"\\u{1F354}";
+    }
+
+    fn @"orderFood() when state = 🍔"(x: i32) Food {
+        _ = x;
+        return .@"🍟";
+    }
+
+    fn @"orderFood() when state = \\u{1F35F}"(x: i32) Food {
+        _ = x;
+        return .@"🍕";
+    }
+};
+
+fn orderFood(state: Food, x: i32) Food {
+    inline for (@typeInfo(Food).Enum.fields) |field| {
+        if (state == @field(Food, field.name)) {
+            const f = @field(OrderFood, "orderFood() when state = " ++ field.name);
+            return f(x);
+        }
+    }
+    unreachable;
+}
+
+pub fn main() !void {
+    std.debug.print("field access: {any}\\n", .{&OrderFood.@"orderFood() when state = \\u{1F35F}"});
+
+    // TODO FIXME XXX NOTE the last tag determines the color of the line
+    // NOTE TODO FIXME XXX something has gone very wrong here
+    // XXX NOTE TODO FIXME comment out next line to fix invalid escape
+    // FIXME XXX NOTE TODO comment out next line to fix invalid escape
+    const invalid_escape = "\\z \\u";
+
+    // TODO NOTE FIXME XXX this ordering makes more sense
+    // this is a normal comment
+    // TODO implement food ordering
+    // NOTE be sure to pick extras
+    // FIXME this isn't working quite right
+    // XXX something is strange here
+
+    // something is strange here XXX I just wanted to NOTE that
+
+    var state: Food = .@"🍕";
+    std.debug.print("ordering {any}\\n", .{state});
+    state = orderFood(state, 123);
+    std.debug.print("ordering {any}\\n", .{state});
+    state = orderFood(state, 123);
+    std.debug.print("ordering {any}\\n", .{state});
+    state = orderFood(state, 123);
+    std.debug.print("ordering {any}\\n", .{state});
+    state = orderFood(state, 123);
+    std.debug.print("ordering {any}\\n", .{state});
+}
+    `;
     if (zig_language_definition) {
         hljs.registerLanguage('zig', zig_language_definition);
     } else {
         console.log('zig_language_definition() function not defined');
     }
-    const highlighted_code_1 = hljs.highlight(zig_code_1, {language: "zig", ignoreIllegals: true })
-    const highlighted_code_2 = hljs.highlight(zig_code_2, {language: "zig", ignoreIllegals: true })
-    document.getElementById('code_container_1').innerHTML = highlighted_code_1.value;
-    document.getElementById('code_container_2').innerHTML = highlighted_code_2.value;
+
+    function highlight_it(code, container) {
+const result = hljs.highlight(code, {language: "zig", ignoreIllegals: true });
+document.getElementById(container).innerHTML = result.value;
+    }
+
+    highlight_it(zig_code_1, 'code_container_1');
+    highlight_it(zig_code_2, 'code_container_2');
+    highlight_it(zig_code_3, 'code_container_3');
 </script>
 </body>
 </html>
