@@ -1,5 +1,7 @@
 /* We do not use SASS features here to make it easier to include this file without pre-compilation in _dev/test-syntax-highlight.html */
 
+// uncomment for local testing color definitions in color_definitions.scss are based on the data below
+/*
 :root {
   --zig-fg: inherit;
   --zig-bg: inherit;
@@ -10,10 +12,12 @@
   --zig-keyword: #333;
   --zig-literal: #005C5C;
   --zig-built-in: #005C7A;
+  --zig-operator: var(--zig-code-fg);
   --zig-type: #458;
   --zig-function: #900;
   --zig-function-fw: bold;
   --zig-number: var(--zig-literal);
+  --zig-field-identifier: var(--zig-code-fg);
 
   --zig-string: #d14; // #156225;
   --zig-string-escape-invalid: black;
@@ -41,10 +45,12 @@
     --zig-keyword: #ccc;
     --zig-literal: #ff8080;
     --zig-built-in: #ff894c;
+    --zig-operator: var(--zig-code-fg);
     --zig-type: #68f;
     --zig-function: #b1a0f8;
     --zig-function-fw: normal;
     --zig-number: var(--zig-literal);
+    --zig-field-identifier: var(--zig-code-fg);
 
     --zig-string: #2e5;
     --zig-string-escape-invalid: black;
@@ -61,10 +67,12 @@
     --zig-comment-tag-note-bg: inherit;
   }
 }
+*/
 
 .lang-zig .hljs-keyword { color: var(--zig-keyword); font-weight: bold; }
 .lang-zig .hljs-literal { color: var(--zig-literal); }
 .lang-zig .hljs-built_in { color: var(--zig-built-in); }
+.lang-zig .hljs-operator { color: var(--zig-operator); font-weight: normal; }
 .lang-zig .hljs-type { color: var(--zig-type); font-weight: bold; }
 .lang-zig .hljs-function { color: var(--zig-function); font-weight: var(--zig-function-fw); }
 .lang-zig .hljs-number { color: var(--zig-number); }
@@ -79,6 +87,8 @@
 .lang-zig .hljs-comment-tag.tag-fixme { color: var(--zig-comment-tag-fixme); background: var(--zig-comment-tag-fixme-bg); }
 .lang-zig .hljs-comment-tag.tag-xxx   { color: var(--zig-comment-tag-xxx);   background: var(--zig-comment-tag-xxx-bg); }
 .lang-zig .hljs-comment-tag.tag-note  { color: var(--zig-comment-tag-note);  background: var(--zig-comment-tag-note-bg); }
+
+.lang-zig .hljs-field-identifier { color: var(--zig-field-identifier); }
 
 @supports(selector(:has(span))) {
 /* color comment line based on the last comment tag contained in the line */

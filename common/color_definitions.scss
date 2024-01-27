@@ -1,0 +1,34 @@
+
+// combines the values from commo.scss from the light mode and dark mode, letting discourse choose
+:root {
+  --zig-fg: #{dark-light-choose(unquote("inherit"), unquote("#ccc"))};
+  --zig-bg: #{dark-light-choose(unquote("inherit"), unquote("#232323"))};
+
+  --zig-code-fg: #{dark-light-choose(unquote("inherit"), unquote("#c7c7c7"))};
+  --zig-code-bg: #{dark-light-choose(unquote("#f9f9f9"), unquote("#3c3c3c"))};
+
+  --zig-keyword: #{dark-light-choose(unquote("#333"), unquote("#ccc"))};
+  --zig-literal: #{dark-light-choose(unquote("#005C5C"), unquote("#ff8080"))};
+  --zig-built-in: #{dark-light-choose(unquote("#005C7A"), unquote("#ff894c"))};
+  --zig-operator: var(--zig-code-fg);
+  --zig-type: #{dark-light-choose(unquote("#458"), unquote("#68f"))};
+  --zig-function: #{dark-light-choose(unquote("#900"), unquote("#b1a0f8"))};
+  --zig-function-fw: #{dark-light-choose(unquote("bold"), unquote("normal"))};
+  --zig-number: var(--zig-literal);
+  --zig-field-identifier: var(--zig-code-fg);
+
+  --zig-string: #{dark-light-choose(unquote("#d14"), unquote("#2e5"))};
+  --zig-string-escape-invalid: black;
+  --zig-string-escape-invalid-bg: #ff5050;
+
+  --zig-comment: #{dark-light-choose(unquote("#545454"), unquote("#aa7"))};
+  --zig-comment-tag-todo: #{dark-light-choose(unquote("#cc4015"), unquote("#ff8a66"))};
+  --zig-comment-tag-todo-bg: inherit;
+  --zig-comment-tag-fixme: #ff4911;
+  --zig-comment-tag-fixme-bg: black;
+  --zig-comment-tag-xxx: black;
+  --zig-comment-tag-xxx-bg: #ff4911;
+  --zig-comment-tag-note: #{dark-light-choose(unquote("inherit"), unquote("#ffdb50"))};
+  --zig-comment-tag-note-bg: #{dark-light-choose(unquote("#ffdb50"), unquote("inherit"))};
+}
+
