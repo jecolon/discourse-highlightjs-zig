@@ -70,7 +70,7 @@
 */
 
 .lang-zig .hljs-keyword { color: var(--zig-keyword); font-weight: bold; }
-.lang-zig .hljs-literal { color: var(--zig-literal); }
+.lang-zig .hljs-literal { color: var(--zig-literal); font-weight: normal; }
 .lang-zig .hljs-built_in { color: var(--zig-built-in); }
 .lang-zig .hljs-operator { color: var(--zig-operator); font-weight: normal; }
 .lang-zig .hljs-type { color: var(--zig-type); font-weight: bold; }
